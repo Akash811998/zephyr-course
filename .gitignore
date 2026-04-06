@@ -1,5 +1,7 @@
 # Build
 build
+.vscode
+build.log
 
 # West files
 .west

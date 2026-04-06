@@ -6,10 +6,8 @@ three ways:
 
 ---
 
-## Manual Zephyr Setup
 
-Follow the following guide:
-- [Getting Started Guide](https://docs.zephyrproject.org/latest/develop/getting_started/index.html#).
 
-Make sure to select appropriate OS and to perform all steps till
-[Build the Blinky Sample](https://docs.zephyrproject.org/latest/develop/getting_started/index.html#build-the-blinky-sample).
+
+Lab2:
+->try  chaning the blinkig interval of an LED using prj.conf
