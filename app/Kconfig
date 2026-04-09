@@ -1,9 +1,23 @@
 
+menu "Zephyr configuration"
+    source "kconfig.zephyr"
+
+endmenu
+
+config APP_HEARTBEAT_PERIOD_MS
+    int "Heartbeat period (ms)"
+    default 500
+    range 100 2000
+    help
+        "Set the period for the heartbeat LED in milliseconds. This controls how often the LED will toggle to indicate that the system is running."
+
+
 menuconfig LED_Subsystem
     bool "LED Subsystem"
     default n
     help
         "Enable the LED Subsystem for controlling LEDs on the board."
+
 
 choice
     prompt "LED blink sleep time"
@@ -62,4 +76,4 @@ menu "Expert Settings"
         "Enable custom blink patterns for the LED, allowing for more complex behaviors than simple on/off blinking."
 endmenu
 
-  source "kconfig.zephyr"
+

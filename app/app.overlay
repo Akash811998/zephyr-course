@@ -1,0 +1,6 @@
+/{
+    aliases {
+        /* Alias the default node to a more descriptive name */
+        app-led = &green_led_2;
+    };
+};
