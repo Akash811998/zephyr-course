@@ -1,0 +1,6 @@
+board:
+  name: task2_board
+  full_name: IOMICO Test Board Nucleo F401RE
+  vendor: st
+  socs:
+    - name: stm32f401xe
