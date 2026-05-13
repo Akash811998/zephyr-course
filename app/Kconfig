@@ -76,4 +76,5 @@ menu "Expert Settings"
         "Enable custom blink patterns for the LED, allowing for more complex behaviors than simple on/off blinking."
 endmenu
 
+rsource "../drivers/our_driver/Kconfig"
 

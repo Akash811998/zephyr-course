@@ -1,6 +1,11 @@
-// /{
-//     aliases {
-//         /* Alias the default node to a more descriptive name */
-//         app-led = &green_led_2;
-//     };
-// };
+/ {
+    our_driver0: our_driver {
+        compatible = "our,driver";
+        status = "okay";
+    };
+    our_driver1: our_driver1 {
+        compatible = "our,driver";
+        status = "okay";
+    };
+
+};
