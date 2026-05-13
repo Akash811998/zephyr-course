@@ -3,6 +3,7 @@
 #include <zephyr/devicetree.h>
 #include <zephyr/drivers/sensor.h>
 #include <zephyr/logging/log.h>
+#include "../../drivers/our_driver/our_driver.h"
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
@@ -18,6 +19,8 @@ const struct device *dev = DEVICE_DT_GET(DT_NODELABEL(our_driver0));
 	}
 	int ret;
 	struct sensor_value val;
+
+	our_driver_set_parameter(dev, 42);
 
 	while(1)
 	{

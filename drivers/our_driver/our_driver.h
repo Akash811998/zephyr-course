@@ -1,0 +1,1 @@
+void our_driver_set_parameter(const struct device *dev, uint32_t param);

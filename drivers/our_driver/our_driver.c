@@ -3,7 +3,12 @@
 #include <zephyr/logging/log.h>
 #include <zephyr/drivers/gpio.h>
 
+
 #define DT_DRV_COMPAT our_driver
+
+typedef struct our_driver_struct {
+    uint32_t my_param;
+} our_driver_struct_t;
 
 LOG_MODULE_REGISTER(our_driver, LOG_LEVEL_INF);
 
@@ -50,8 +55,25 @@ static int init(const struct device *dev) {
      return 0;
 }
 
+void our_driver_set_parameter(const struct device *dev, uint32_t param)
+{
+    our_driver_struct_t *drv_data = (our_driver_struct_t *)dev->data;
+
+    LOG_INF("Calling the custom extensin API for our Driver");
+    if (NULL != drv_data)
+    {
+        drv_data->my_param = param;
+        LOG_INF("Setting my_param to %u", drv_data->my_param);
+    }
+    else
+    {
+        LOG_ERR("Device data is NULL");
+    }
+}
+
 // Define the device instance for our driver
 #define OUR_DRIVER_INST(inst) \
-    DEVICE_DT_INST_DEFINE(inst, init, NULL, NULL, NULL, POST_KERNEL, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT, &our_driver_api);
+    static struct our_driver_struct my_led_struct_##inst;   \
+    DEVICE_DT_INST_DEFINE(inst, init, NULL, &my_led_struct_##inst, NULL, POST_KERNEL, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT, &our_driver_api);
 
 DT_INST_FOREACH_STATUS_OKAY(OUR_DRIVER_INST)
