@@ -1,2 +1,2 @@
-config OUR_DRIVER
+    config OUR_DRIVER
     bool "Our Custom Driver"
