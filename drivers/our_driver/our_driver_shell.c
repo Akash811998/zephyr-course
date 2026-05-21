@@ -1,5 +1,6 @@
 #include <zephyr/shell/shell.h>
 #include <zephyr/drivers/sensor.h>
+#include "our_driver.h"
 
 int ret=0;
 
@@ -62,11 +63,32 @@ static int cmd_my_sensor_info_handler(const struct shell *shell, size_t argc, ch
     return 0;
 }
 
+static int cmd_my_sensor_set_handler(const struct shell *shell, size_t argc, char **argv)
+{
+    const struct device *dev = shell_device_get_binding("our_driver0");
+    if(!dev) {
+        shell_error(shell, "Could not find device %s", "our_driver0");
+        return -EFAULT;
+    }
+
+    int value = atoi(argv[1]);
+
+    if((value < 1) || (value > 100)) {
+        shell_error(shell, "Invalid value. Must be between 1 and 100.");
+        return -EINVAL;
+    }
+
+    our_driver_set_parameter(dev, value);
+    return 0;
+}
+
+
 SHELL_STATIC_SUBCMD_SET_CREATE(shell_driver,
     //SHELL_CMD(my_sensor_attr_get, NULL, "Get my sensor attribute", cmd_my_sensor_get_handler),
     SHELL_CMD(read, NULL, "read my sensor attribute", cmd_my_sensor_read_handler),
     SHELL_CMD(fetch, NULL, "CAll the fetch function ", cmd_my_sensor_fetch_handler),
     SHELL_CMD(info, NULL, "Get the device name and ready state", cmd_my_sensor_info_handler),
+    SHELL_CMD_ARG(set,NULL, "Set my sensor attribute", cmd_my_sensor_set_handler, 2, 0),
     SHELL_SUBCMD_SET_END
 );
 
